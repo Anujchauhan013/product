@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="p-fixed">
+  <span>
+    <a class="color pointer" (click)="products()">
+        <img src="../../assets/images/thetechnologymaker.png" width="110vw" class="mt-1">
+    </a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li class="style_name cursor_d">Anuj Chauhan</li>
+    <li>
+      <a class="pointer" [matMenuTriggerFor]="product">
+        <i class="fa fa-user-o" aria-hidden="true"></i>
+      </a>
+      <mat-menu #product="matMenu">
+        <button mat-menu-item>
+          <i class="fa fa-share-square-o fa-lg mr-1" aria-hidden="true"></i>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </li>
+  </ul>
+</mat-toolbar>

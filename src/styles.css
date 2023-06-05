@@ -1,1 +1,138 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container_body {
+  width: 100vw;
+  margin-left: 77px;
+  margin-top: 66px;
+  position: relative;
+  z-index: 0;
+}
+
+.b-color {
+  background-color: darkslateblue;
+}
+
+.blur_color {
+  color: #cbc8d2;
+}
+
+.posit-height {
+  height: 100vh;
+  width: 6vw;
+  position: fixed;
+  margin-top: 56px;
+}
+
+.center {
+  text-align: center;
+}
+
+.color {
+  color: aliceblue;
+}
+
+.cursor_d {
+  cursor: default;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.m-0 {
+  margin: 0px;
+}
+
+.mr-06{
+  margin-right: 6px;
+}
+
+.mr-1 {
+  margin-right: 10px;
+}
+
+.ml-01 {
+  margin-left: 5px;
+}
+
+.ml-1 {
+  margin-left: 10px;
+}
+
+.ml-2 {
+  margin-left: 20px;
+}
+
+.my-1 {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.p-fixed {
+  position: fixed;
+  z-index: 1;
+}
+
+.addButton1 {
+  background: #d6d6dc;
+  border: solid 1px #d6d6dc;
+  color: black;
+  border-radius: 4px;
+}
+
+.addButton1:hover{
+  background: #222223;
+  border: solid 1px #222223;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .posit-height {
+    height: 170vh !important;
+    width: 18vw !important;
+    position: fixed;
+    margin-top: 56px;
+  }
+  .ml-1 {
+    margin-left: 1px;
+  }
+}
+
+@media (max-width: 770px){
+  .posit-height {
+    height: 100vh;
+    width: 10vw;
+    position: fixed;
+    margin-top: 56px;
+  }
+  .ml-1 {
+    margin-left: 1px;
+  }
+  .container {
+    width: 700px;
+}
+
+}
+
+@media only screen and (min-width: 1400px) {
+  .container{
+    width: 1290px !important;
+  }
+  .ml-1{
+    margin-left: 20px;
+  }
+}

@@ -1,0 +1,29 @@
+ul{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.mat-toolbar.mat-primary{
+    background: #37196c;
+}
+
+.style_name{
+    font-size: small;
+    margin-right: 20px;
+    margin-top: 1px;
+}
+
+.mt-1{
+    margin-top: 3px;
+}

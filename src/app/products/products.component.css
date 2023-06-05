@@ -1,0 +1,51 @@
+.readio {
+  border: none;
+}
+.subTable {
+  padding-left: 8px;
+  text-align: left;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.box {
+  position: relative;
+}
+
+.inputText {
+  padding: 10px;
+  width: 35px;
+  height: 35px;
+  background: hwb(48 65% 33%);
+  border: 3px solid hwb(48 65% 33%);
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-family: Comic Sans MS;
+  font-size: 26px;
+  color: white;
+  outline: none;
+  transition: 0.5s;
+}
+.box:hover input {
+  width: 350px;
+  background: black;
+  border-radius: 10px;
+}
+.box i {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(-50%, -50%);
+  font-size: 26px;
+  color: black;
+  transition: 0.2s;
+}
+.box:hover i {
+  opacity: 0;
+  z-index: -1;
+}
+
+.red {
+  color: red;
+}
+

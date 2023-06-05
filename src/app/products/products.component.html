@@ -1,0 +1,467 @@
+<app-header></app-header>
+<div class="row m-0 d-flex">
+  <div class="col-3 b-color pa-5 posit-height">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-9 container_body">
+    <div class="container mt-15 ml-1">
+      <div *ngIf="!viewProduct">
+        <h2 class="mb-10">
+          <b class="blur_color cursor_d">Products Details</b>
+        </h2>
+      </div>
+      <div *ngIf="viewProduct">
+        <h2 class="mb-10">
+          <b class="blur_color cursor_d">Product Form</b>
+        </h2>
+      </div>
+      <div class="row ma-0">
+        <div
+          class="clearfix row-deck panel panel-default card-view"
+          *ngIf="!viewProduct"
+        >
+          <div>
+            <!-- <div class="col-md-6 box mb-15">
+              <form name="search">
+                <input
+                  type="text"
+                  class="inputText"
+                  name="txt"
+                  onmouseout="this.value = ''; this.blur();"
+                />
+              </form>
+              <i class="fa fa-search"></i>
+            </div> -->
+            <div class="col-md-12 supplier-style mb-15">
+              <button
+                class="addButton1 float-right"
+                (click)="showCustomerForm()"
+              >
+                <span class="css-button-icon"
+                  ><i class="fa fa-plus mr-06" aria-hidden="true"></i
+                ></span>
+                <span class="css-button-text">New Product</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-12" *ngIf="!viewProduct">
+            <div class="table-responsive mb-5">
+              <p-table
+                [scrollable]="true"
+                scrollWidth="100%"
+                [style]="{ width: '100%' }"
+                scrollHeight="310px"
+                [value]="productData"
+                [globalFilterFields]="['title', 'category']"
+                #dt1
+                dataKey="id"
+                [rows]="10"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 25, 50]"
+                paginatorDropdownAppendTo="body"
+                [autoLayout]="true"
+                styleClass="p-datatable-customers p-datatable-gridlines p-datatable-responsive-demo"
+                [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              >
+                <ng-template pTemplate="caption">
+                  <div class="flex">
+                    <span class="p-input-icon-left ml-auto">
+                      <i class="pi pi-search ml-01"></i>
+                      <input
+                        style="width: 150%; padding-left: 26px !important"
+                        pInputText
+                        type="text"
+                        (input)="
+                          dt1.filterGlobal(
+                            $any($event.target).value,
+                            'contains'
+                          )
+                        "
+                        placeholder="Search Product"
+                      />
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="colgroup" let-columns>
+                  <colgroup>
+                    <col style="width: 50px" />
+                    <col style="width: 185px" />
+                    <col style="width: 80px" />
+                    <col style="width: 180px" />
+                    <col style="width: 160px" />
+                    <col style="width: 160px" />
+                    <col style="width: 155px" />
+                    <col style="width: 90px" />
+                  </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>
+                      <div class="cursor_d">Id</div>
+                    </th>
+                    <th>
+                      <div class="cursor_d">
+                        Title
+                        <p-columnFilter
+                          type="text"
+                          field="title"
+                          display="menu"
+                          class="ml-1"
+                        ></p-columnFilter>
+                      </div>
+                    </th>
+                    <th>
+                      <div class="cursor_d">Price</div>
+                    </th>
+                    <th>
+                      <div class="cursor_d">Description</div>
+                    </th>
+                    <th>
+                      <div class="cursor_d">
+                        Category
+                        <p-columnFilter
+                          type="text"
+                          field="category"
+                          display="menu"
+                          class="ml-1"
+                        ></p-columnFilter>
+                      </div>
+                    </th>
+                    <th>
+                      <div class="cursor_d">Image</div>
+                    </th>
+                    <th>
+                      <div class="cursor_d">Rating</div>
+                    </th>
+                    <th>
+                      <div class="cursor_d">Options</div>
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template
+                  pTemplate="body"
+                  let-productData
+                  filter
+                  let-i="rowIndex"
+                >
+                  <tr>
+                    <td>{{ productData.id }}</td>
+                    <td>{{ productData.title }}</td>
+                    <td>{{ productData.price }}</td>
+                    <td
+                      style="
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding: 6px;
+                      "
+                      title="{{ productData.description }}"
+                    >
+                      {{ productData.description }}
+                    </td>
+                    <td>{{ productData.category }}</td>
+                    <td>
+                      <img
+                        [src]="productData.image"
+                        alt="Image"
+                        width="80vw"
+                        height="80vh"
+                      />
+                    </td>
+                    <td>
+                      <table class="subTable">
+                        <tr>
+                          <td class="subTable">Count</td>
+                          <td class="subTable">
+                            {{ productData.rating.count }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="subTable">Rate</td>
+                          <td class="subTable">
+                            {{ productData.rating.rate }}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <!-- <td>{{ productData.rating }}</td> -->
+                    <td>
+                      <a
+                        class="pa-5 ml-1 pointer"
+                        (click)="productEdit(productData.id,i)"
+                      >
+                        <i aria-hidden="true" class="fa fa-pencil fa-lg"></i>
+                      </a>
+                      <a
+                        class="pa-5 pointer"
+                        (click)="delete(productData.id)"
+                      >
+                        <i
+                          class="fa fa-trash-o fa-lg red"
+                          aria-hidden="true"
+                        ></i>
+                      </a>
+                    </td>
+                  </tr>
+                </ng-template>
+                <!-- <ng-template pTemplate="emptymessage">
+                <tr *ngIf="!spinner">
+                  <td colspan="5" style="text-align: center">No Data Found</td>
+                </tr>
+                <tr *ngIf="spinner">
+                  <td colspan="5" style="text-align: center">
+                    <div
+                      class="col-md-12 text-center"
+                      *ngIf="spinner"
+                      style="display: block"
+                    >
+                      <i class="fa fa-spinner fa-spin fa-2x"></i>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>  -->
+              </p-table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="clearfix row-deck panel panel-default card-view"
+          *ngIf="viewProduct"
+        >
+          <div class="">
+            <div class="col-md-12 supplier-style">
+              <button
+                type="button"
+                class="addButton1 float-right"
+                (click)="showCustomerTable()"
+              >
+                <span class="css-button-icon"
+                  ><i class="fa fa-arrow-left mr-06" aria-hidden="true"></i
+                ></span>
+                <span class="css-button-text">Back</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-xl-12 col-lg-12">
+            <div class="card-view">
+              <div class="card-body">
+                <form [formGroup]="myForm">
+                  <div class="controls">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="title"
+                            >Title <span style="color: red">*</span></label
+                          >
+                          <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="title"
+                            [ngClass]="{
+                              'is-invalid': submitted && f['title'].errors
+                            }"
+                            required
+                          />
+                          <div
+                            *ngIf="submitted && f['title'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f['title'].errors['required']">
+                              Title is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="price"
+                            >Price <span style="color: red">*</span></label
+                          >
+                          <input
+                            type="number"
+                            name="price"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="price"
+                            [ngClass]="{
+                              'is-invalid': submitted && f['price'].errors
+                            }"
+                            required
+                          />
+                          <div
+                            *ngIf="submitted && f['price'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f['price'].errors['required']">
+                              Price is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="phone"
+                            >Description<span style="color: red">*</span></label
+                          >
+                          <input
+                            type="text"
+                            name="description"
+                            class="form-control"
+                            formControlName="description"
+                            [ngClass]="{
+                              'is-invalid': submitted && f['description'].errors
+                            }"
+                            required
+                          />
+                          <div
+                            *ngIf="submitted && f['description'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f['description'].errors['required']">
+                              Description is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="category"
+                            >Category <span style="color: red">*</span></label
+                          >
+                          <input
+                            type="text"
+                            name="category"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="category"
+                            [ngClass]="{
+                              'is-invalid': submitted && f['category'].errors
+                            }"
+                            required
+                          />
+                          <div
+                            *ngIf="submitted && f['category'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f['category'].errors['required']">
+                              Category is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="image"
+                            >Image<span style="color: red">*</span></label
+                          >
+                          <input
+                            type="file"
+                            (change)="onProfileUpload($event)"
+                            class="form-control upload"
+                            formControlName="image"
+                            [ngClass]="{
+                              'is-invalid': submitted && f['image'].errors
+                            }"
+                            required
+                          />
+                          <div
+                            *ngIf="submitted && f['image'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f['image'].errors['required']">
+                              Image is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-10">
+                        <h3><b>Rating Details</b></h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="count"
+                                >Count<span style="color: red">*</span></label
+                              >
+                              <input
+                                type="number"
+                                name="count"
+                                class="form-control"
+                                placeholder=""
+                                formControlName="count"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f['count'].errors
+                                }"
+                                required
+                              />
+                              <div
+                                *ngIf="submitted && f['count'].errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f['count'].errors['required']">
+                                  Count is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="rate"
+                            >Rate <span style="color: red">*</span></label
+                          >
+                          <input
+                            type="number"
+                            name="rate"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="rate"
+                            [ngClass]="{
+                              'is-invalid': submitted && f['rate'].errors
+                            }"
+                            required
+                          />
+                          <div
+                            *ngIf="submitted && f['rate'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f['rate'].errors['required']">
+                              Rate is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="col-md-12 supplier-style mb-10">
+                    <button
+                      type="button"
+                      class="btn btn-primary cancleButton float-right"
+                      (click)="showCustomerTable()"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      [disabled]="spinner"
+                      (click)="onSubmit()"
+                      type="submit"
+                      class="btn btn-success saveButton ml-1"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
